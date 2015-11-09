@@ -13,8 +13,8 @@ pygame.init()
 
 
 # Default dimensions of the game window (px)
-display_width = 800
-display_height = 600
+display_width = 1280
+display_height = 720
 
 
 
@@ -30,17 +30,70 @@ pygame.display.set_caption('Falling Stars')
 
 # Class that creates a star object
 class Star:
-    def __init__(self, starSize, xCoordinate, yCoordinate, starColor, fallSpeed):
+    def __init__(self, starSize, xCoordinate, yCoordinate, starColor, fallSpeed, fallDirection):
         self.starSize = starSize
         self.xCoordinate = xCoordinate
         self.yCoordinate = yCoordinate
         self.starColor = starColor
         self.fallSpeed = fallSpeed
+        self.fallDirection = fallDirection
 
     def fall(self):
         self.yCoordinate += self.fallSpeed
+        self.xCoordinate += self.fallDirection
         pygame.draw.rect(gameScreen, self.starColor, [self.xCoordinate, self.yCoordinate, self.starSize, self.starSize])
         if self.yCoordinate > display_height:
+            fallingStars.remove(self)
+
+# Class that creates a star object
+class upStar:
+    def __init__(self, starSize, xCoordinate, yCoordinate, starColor, fallSpeed, fallDirection):
+        self.starSize = starSize
+        self.xCoordinate = xCoordinate
+        self.yCoordinate = yCoordinate
+        self.starColor = starColor
+        self.fallSpeed = fallSpeed
+        self.fallDirection = fallDirection
+
+    def fall(self):
+        self.yCoordinate -= self.fallSpeed
+        self.xCoordinate += self.fallDirection
+        pygame.draw.rect(gameScreen, self.starColor, [self.xCoordinate, self.yCoordinate, self.starSize, self.starSize])
+        if self.yCoordinate < 0:
+            fallingStars.remove(self)
+
+# Class that creates a star object
+class lStar:
+    def __init__(self, starSize, xCoordinate, yCoordinate, starColor, fallSpeed, fallDirection):
+        self.starSize = starSize
+        self.xCoordinate = xCoordinate
+        self.yCoordinate = yCoordinate
+        self.starColor = starColor
+        self.fallSpeed = fallSpeed
+        self.fallDirection = fallDirection
+
+    def fall(self):
+        self.yCoordinate += self.fallDirection
+        self.xCoordinate -= self.fallSpeed
+        pygame.draw.rect(gameScreen, self.starColor, [self.xCoordinate, self.yCoordinate, self.starSize, self.starSize])
+        if self.xCoordinate < 0:
+            fallingStars.remove(self)
+
+# Class that creates a star object
+class rStar:
+    def __init__(self, starSize, xCoordinate, yCoordinate, starColor, fallSpeed, fallDirection):
+        self.starSize = starSize
+        self.xCoordinate = xCoordinate
+        self.yCoordinate = yCoordinate
+        self.starColor = starColor
+        self.fallSpeed = fallSpeed
+        self.fallDirection = fallDirection
+
+    def fall(self):
+        self.yCoordinate += self.fallDirection
+        self.xCoordinate += self.fallSpeed
+        pygame.draw.rect(gameScreen, self.starColor, [self.xCoordinate, self.yCoordinate, self.starSize, self.starSize])
+        if self.xCoordinate > display_width:
             fallingStars.remove(self)
 
 
@@ -129,8 +182,74 @@ while starFall:
 
     # keep making the stars...
     if makeStars:
-        fallingStars.append(Star(random.randrange(1, 20), random.randrange(1, display_width), -5, colorList[random.randrange(0, 6)], random.randrange(1, 10)))
-        fallingStars.append(Star(random.randrange(1, 20), random.randrange(1, display_width), -5, colorList[random.randrange(0, 6)], random.randrange(1, 10)))
+        # stars going down
+        fallingStars.append(Star(random.randrange(1, 20), random.randrange(1, display_width), -5, colorList[random.randrange(0, 6)], random.randrange(1, 10), random.randrange(-3, 3)))
+        fallingStars.append(Star(random.randrange(1, 20), random.randrange(1, display_width), -5, colorList[random.randrange(0, 6)], random.randrange(1, 10), random.randrange(-2, 2)))
+        #fallingStars.append(Star(random.randrange(1, 20), random.randrange(1, display_width), -5, colorList[random.randrange(0, 6)], random.randrange(1, 10), random.randrange(-3, 3)))
+        #fallingStars.append(Star(random.randrange(1, 20), random.randrange(1, display_width), -5, colorList[random.randrange(0, 6)], random.randrange(1, 10), random.randrange(-2, 2)))
+        #fallingStars.append(Star(random.randrange(1, 20), random.randrange(1, display_width), -5, colorList[random.randrange(0, 6)], random.randrange(1, 10), random.randrange(-3, 3)))
+        #fallingStars.append(Star(random.randrange(1, 20), random.randrange(1, display_width), -5, colorList[random.randrange(0, 6)], random.randrange(1, 10), random.randrange(-2, 2)))
+        #fallingStars.append(Star(random.randrange(1, 20), random.randrange(1, display_width), -5, colorList[random.randrange(0, 6)], random.randrange(1, 10), random.randrange(-3, 3)))
+        #fallingStars.append(Star(random.randrange(1, 20), random.randrange(1, display_width), -5, colorList[random.randrange(0, 6)], random.randrange(1, 10), random.randrange(-2, 2)))
+        #fallingStars.append(Star(random.randrange(1, 20), random.randrange(1, display_width), -5, colorList[random.randrange(0, 6)], random.randrange(1, 10), random.randrange(-3, 3)))
+        #fallingStars.append(Star(random.randrange(1, 20), random.randrange(1, display_width), -5, colorList[random.randrange(0, 6)], random.randrange(1, 10), random.randrange(-2, 2)))
+        #fallingStars.append(Star(random.randrange(1, 20), random.randrange(1, display_width), -5, colorList[random.randrange(0, 6)], random.randrange(1, 10), random.randrange(-3, 3)))
+        #fallingStars.append(Star(random.randrange(1, 20), random.randrange(1, display_width), -5, colorList[random.randrange(0, 6)], random.randrange(1, 10), random.randrange(-2, 2)))
+        #fallingStars.append(Star(random.randrange(1, 20), random.randrange(1, display_width), -5, colorList[random.randrange(0, 6)], random.randrange(1, 10), random.randrange(-3, 3)))
+        #fallingStars.append(Star(random.randrange(1, 20), random.randrange(1, display_width), -5, colorList[random.randrange(0, 6)], random.randrange(1, 10), random.randrange(-2, 2)))
+        # stars going up
+        fallingStars.append(upStar(random.randrange(1, 20), random.randrange(1, display_width), display_height + 5, colorList[random.randrange(0, 6)], random.randrange(1, 10), random.randrange(-3, 3)))
+        fallingStars.append(upStar(random.randrange(1, 20), random.randrange(1, display_width), display_height + 5, colorList[random.randrange(0, 6)], random.randrange(1, 10), random.randrange(-2, 2)))
+        #fallingStars.append(upStar(random.randrange(1, 20), random.randrange(1, display_width), display_height + 5, colorList[random.randrange(0, 6)], random.randrange(1, 10), random.randrange(-3, 3)))
+        #fallingStars.append(upStar(random.randrange(1, 20), random.randrange(1, display_width), display_height + 5, colorList[random.randrange(0, 6)], random.randrange(1, 10), random.randrange(-2, 2)))
+        #fallingStars.append(upStar(random.randrange(1, 20), random.randrange(1, display_width), display_height + 5, colorList[random.randrange(0, 6)], random.randrange(1, 10), random.randrange(-3, 3)))
+        #fallingStars.append(upStar(random.randrange(1, 20), random.randrange(1, display_width), display_height + 5, colorList[random.randrange(0, 6)], random.randrange(1, 10), random.randrange(-2, 2)))
+        #fallingStars.append(upStar(random.randrange(1, 20), random.randrange(1, display_width), display_height + 5, colorList[random.randrange(0, 6)], random.randrange(1, 10), random.randrange(-3, 3)))
+        #fallingStars.append(upStar(random.randrange(1, 20), random.randrange(1, display_width), display_height + 5, colorList[random.randrange(0, 6)], random.randrange(1, 10), random.randrange(-2, 2)))
+        #fallingStars.append(upStar(random.randrange(1, 20), random.randrange(1, display_width), display_height + 5, colorList[random.randrange(0, 6)], random.randrange(1, 10), random.randrange(-3, 3)))
+        #fallingStars.append(upStar(random.randrange(1, 20), random.randrange(1, display_width), display_height + 5, colorList[random.randrange(0, 6)], random.randrange(1, 10), random.randrange(-2, 2)))
+        #fallingStars.append(upStar(random.randrange(1, 20), random.randrange(1, display_width), display_height + 5, colorList[random.randrange(0, 6)], random.randrange(1, 10), random.randrange(-3, 3)))
+        #fallingStars.append(upStar(random.randrange(1, 20), random.randrange(1, display_width), display_height + 5, colorList[random.randrange(0, 6)], random.randrange(1, 10), random.randrange(-2, 2)))
+        #fallingStars.append(upStar(random.randrange(1, 20), random.randrange(1, display_width), display_height + 5, colorList[random.randrange(0, 6)], random.randrange(1, 10), random.randrange(-3, 3)))
+        #fallingStars.append(upStar(random.randrange(1, 20), random.randrange(1, display_width), display_height + 5, colorList[random.randrange(0, 6)], random.randrange(1, 10), random.randrange(-2, 2)))
+        #stars going left
+        # Class that creates a star object
+        #class lStar:
+        #    def __init__(self, starSize, xCoordinate, yCoordinate, starColor, fallSpeed, fallDirection):
+        fallingStars.append(lStar(random.randrange(1, 20), display_width + 5, random.randrange(1, display_height), colorList[random.randrange(0, 6)], random.randrange(1, 10), random.randrange(-2, 2)))
+        fallingStars.append(lStar(random.randrange(1, 20), display_width + 5, random.randrange(1, display_height), colorList[random.randrange(0, 6)], random.randrange(1, 10), random.randrange(-2, 2)))
+        #fallingStars.append(lStar(random.randrange(1, 20), display_width + 5, random.randrange(1, display_height), colorList[random.randrange(0, 6)], random.randrange(1, 10), random.randrange(-2, 2)))
+        #fallingStars.append(upStar(random.randrange(1, 20), display_width + 5, random.randrange(1, display_height), colorList[random.randrange(0, 6)], random.randrange(1, 10), random.randrange(-3, 3)))
+        #fallingStars.append(upStar(random.randrange(1, 20), display_width + 5, random.randrange(1, display_height), colorList[random.randrange(0, 6)], random.randrange(1, 10), random.randrange(-3, 3)))
+        #fallingStars.append(upStar(random.randrange(1, 20), display_width + 5, random.randrange(1, display_height), colorList[random.randrange(0, 6)], random.randrange(1, 10), random.randrange(-3, 3)))
+        #fallingStars.append(upStar(random.randrange(1, 20), display_width + 5, random.randrange(1, display_height), colorList[random.randrange(0, 6)], random.randrange(1, 10), random.randrange(-3, 3)))
+        #fallingStars.append(upStar(random.randrange(1, 20), display_width + 5, random.randrange(1, display_height), colorList[random.randrange(0, 6)], random.randrange(1, 10), random.randrange(-3, 3)))
+        #fallingStars.append(upStar(random.randrange(1, 20), display_width + 5, random.randrange(1, display_height), colorList[random.randrange(0, 6)], random.randrange(1, 10), random.randrange(-3, 3)))
+        #fallingStars.append(upStar(random.randrange(1, 20), display_width + 5, random.randrange(1, display_height), colorList[random.randrange(0, 6)], random.randrange(1, 10), random.randrange(-3, 3)))
+        #fallingStars.append(upStar(random.randrange(1, 20), display_width + 5, random.randrange(1, display_height), colorList[random.randrange(0, 6)], random.randrange(1, 10), random.randrange(-3, 3)))
+        #fallingStars.append(upStar(random.randrange(1, 20), display_width + 5, random.randrange(1, display_height), colorList[random.randrange(0, 6)], random.randrange(1, 10), random.randrange(-3, 3)))
+        #fallingStars.append(upStar(random.randrange(1, 20), display_width + 5, random.randrange(1, display_height), colorList[random.randrange(0, 6)], random.randrange(1, 10), random.randrange(-3, 3)))
+        #fallingStars.append(upStar(random.randrange(1, 20), display_width + 5, random.randrange(1, display_height), colorList[random.randrange(0, 6)], random.randrange(1, 10), random.randrange(-3, 3)))
+        #stars going right
+        # Class that creates a star object
+        #class rStar:
+        #    def __init__(self, starSize, xCoordinate, yCoordinate, starColor, fallSpeed, fallDirection):
+        fallingStars.append(rStar(random.randrange(1, 20), -5, random.randrange(1, display_height), colorList[random.randrange(0, 6)], random.randrange(1, 10), random.randrange(-2, 2)))
+        fallingStars.append(rStar(random.randrange(1, 20), -5, random.randrange(1, display_height), colorList[random.randrange(0, 6)], random.randrange(1, 10), random.randrange(-2, 2)))
+        #fallingStars.append(rStar(random.randrange(1, 20), -5, random.randrange(1, display_height), colorList[random.randrange(0, 6)], random.randrange(1, 10), random.randrange(-2, 2)))
+        #fallingStars.append(upStar(random.randrange(1, 20), -5, random.randrange(1, display_height), colorList[random.randrange(0, 6)], random.randrange(1, 10), random.randrange(-3, 3)))
+        #fallingStars.append(upStar(random.randrange(1, 20), -5, random.randrange(1, display_height), colorList[random.randrange(0, 6)], random.randrange(1, 10), random.randrange(-3, 3)))
+        #fallingStars.append(upStar(random.randrange(1, 20), -5, random.randrange(1, display_height), colorList[random.randrange(0, 6)], random.randrange(1, 10), random.randrange(-3, 3)))
+        #fallingStars.append(upStar(random.randrange(1, 20), -5, random.randrange(1, display_height), colorList[random.randrange(0, 6)], random.randrange(1, 10), random.randrange(-3, 3)))
+        #fallingStars.append(upStar(random.randrange(1, 20), -5, random.randrange(1, display_height), colorList[random.randrange(0, 6)], random.randrange(1, 10), random.randrange(-3, 3)))
+        #fallingStars.append(upStar(random.randrange(1, 20), -5, random.randrange(1, display_height), colorList[random.randrange(0, 6)], random.randrange(1, 10), random.randrange(-3, 3)))
+        #fallingStars.append(upStar(random.randrange(1, 20), -5, random.randrange(1, display_height), colorList[random.randrange(0, 6)], random.randrange(1, 10), random.randrange(-3, 3)))
+        #fallingStars.append(upStar(random.randrange(1, 20), -5, random.randrange(1, display_height), colorList[random.randrange(0, 6)], random.randrange(1, 10), random.randrange(-3, 3)))
+        #fallingStars.append(upStar(random.randrange(1, 20), -5, random.randrange(1, display_height), colorList[random.randrange(0, 6)], random.randrange(1, 10), random.randrange(-3, 3)))
+        #fallingStars.append(upStar(random.randrange(1, 20), -5, random.randrange(1, display_height), colorList[random.randrange(0, 6)], random.randrange(1, 10), random.randrange(-3, 3)))
+        #fallingStars.append(upStar(random.randrange(1, 20), -5, random.randrange(1, display_height), colorList[random.randrange(0, 6)], random.randrange(1, 10), random.randrange(-3, 3)))
+
+
         #fallingStars.append(Star(random.randrange(1, 25), random.randrange(1, display_width), -5, colorList[random.randrange(0, 6)], random.randrange(1, 30)))
         #fallingStars.append(Star(random.randrange(1, 25), random.randrange(1, display_width), -5, colorList[random.randrange(0, 6)], random.randrange(1, 30)))
         #fallingStars.append(Star(random.randrange(1, 25), random.randrange(1, display_width), -5, colorList[random.randrange(0, 6)], random.randrange(1, 30)))
@@ -146,7 +265,7 @@ while starFall:
         #print(len(fallingStars))
         # if the list is too big, remove the first item
         # for the computer's sake
-        if len(fallingStars) > 400:
+        if len(fallingStars) > 10000:
             del fallingStars[0]
 
 
